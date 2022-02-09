@@ -2,7 +2,19 @@ type Query {
     categories: [Category!]!
 }
 
+type Mutation {
+    addCategory(
+        name: String!
+    ): Response!
+}
+
 type Category{
     category_id: ID!
     name: String!
+}
+
+type Response {
+	status: Int!
+	message: String!
+	newCategory: Category!
 }
