@@ -2,7 +2,7 @@ import model from './model.js'
 
 export default{
     Mutation: {
-        addCategory: async (_, args) => {
+        addCategory: async (_, args, context) => {
             try {
                 const res = await model.addCategory(args)
                 return {
@@ -18,7 +18,7 @@ export default{
                 }
             }
         },
-        updateCategory: async(_, args) => {
+        updateCategory: async(_, args, context) => {
             try {
                 const res = await model.updateCategory(args)
                 console.log(res);
@@ -36,7 +36,7 @@ export default{
                 }
             }
         },
-        deleteCategory: async(_, args) => {
+        deleteCategory: async(_, args, context) => {
             try {
                 const res = await model.deleteCategory(args)
                 console.log(res);

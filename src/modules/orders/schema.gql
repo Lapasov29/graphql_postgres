@@ -6,16 +6,18 @@ type Mutation {
     addOrder(
         user_id: ID!
         products: [ID!]!
-        name: String!
     ): Response!
 
     updateOrder(
-        category_id: ID!
-        name: String!
+        order_id: ID!
+        user_id: ID!
+        products: [ID!]!
+        isPaid: Boolean
     ): Response!
 
     deleteOrder(
-        category_id: ID!
+        order_id: ID!
+        user_id: ID!
     ):Response!
 }
 

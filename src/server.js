@@ -37,4 +37,4 @@ async function startApolloServer() {
     console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
 }
 console.log(process.cwd());
-startApolloServer()    
+startApolloServer()       

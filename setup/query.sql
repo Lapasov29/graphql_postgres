@@ -32,10 +32,22 @@ select p.*
 from unnest(ARRAY[2,7]) id
 left join products p on p.product_id = id
 
+select p.*
+from (
+    SELECT products from orders
+) id
+left join products p on p.product_id = 7;
 
 
-select o.order_id,
+select 
+o.order_id,
 o.user_id,
+(
+    select 
+        name
+        price
+    from products 
+    where product_id = ARRAY{o.products}
+) as items,
 o.isPad
-from orders o 
-left join products p on ARRAY[o.products] = p.product_id;
+from orders as o;

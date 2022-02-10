@@ -4,7 +4,7 @@ import fs from 'fs'
 
 export default{
     Mutation: {
-        addProduct: async (_, args) => {
+        addProduct: async (_, args, context) => {
             try {
                 let {file} = args
                 const { createReadStream, filename, mimetype, encoding } = await file
@@ -38,7 +38,7 @@ export default{
                 }
             }
         },
-        updateProduct: async(_, args) => {
+        updateProduct: async(_, args, context) => {
             try {
                 console.log(args);
                 const res = await model.updateProduct(args)
@@ -57,10 +57,9 @@ export default{
                 }
             }
         },
-        deleteProduct: async(_, args) => {
+        deleteProduct: async(_, args, context) => {
             try {
                 const res = await model.deleteProduct(args)
-                console.log(res);
                 return {
                     status: 200,
                     message: "OK",

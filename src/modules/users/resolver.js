@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 
 export default{
     Mutation: {
-        updateUser: async(_, args) => {
+        updateUser: async(_, args, context) => {
             try {
                 const res = await model.updateUser(args)
                 console.log(res);
@@ -21,7 +21,7 @@ export default{
                 }
             }
         },
-        deleteUser: async(_, args) => {
+        deleteUser: async(_, args, context) => {
             try {
                 const res = await model.deleteUser(args)
                 return {
