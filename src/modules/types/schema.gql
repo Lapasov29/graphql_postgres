@@ -1,0 +1,9 @@
+scalar Contact
+scalar Email
+scalar Any
+scalar Upload
+
+type Response {
+	status: Int!
+	message: String!
+}

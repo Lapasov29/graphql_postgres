@@ -4,7 +4,7 @@ export default{
     Mutation: {
         addCategory: async (_, args) => {
             try {
-                const res = await model.addCategory(args)
+                const res = await model.addOrder(args)
                 return {
                     status: 200,
                     message: "OK",
@@ -20,7 +20,7 @@ export default{
         },
         updateCategory: async(_, args) => {
             try {
-                const res = await model.updateCategory(args)
+                const res = await model.updateOrder(args)
                 console.log(res);
                 return {
                     status: 200,
@@ -38,7 +38,7 @@ export default{
         },
         deleteCategory: async(_, args) => {
             try {
-                const res = await model.deleteCategory(args)
+                const res = await model.deleteOrder(args)
                 console.log(res);
                 return {
                     status: 200,
@@ -58,7 +58,7 @@ export default{
 
     Query: {
         categories: async (_, args) => {
-            return await model.getCategory(args)
+            return await model.getOrder(args)
         }
     }
 }

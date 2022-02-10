@@ -1,18 +1,20 @@
 type Query {
-    orders: [Order!]!
+    orders(order_id: ID): [Order!]!
 }
 
 type Mutation {
-    addCategory(
+    addOrder(
+        user_id: ID!
+        products: [ID!]!
         name: String!
     ): Response!
 
-    updateCategory(
+    updateOrder(
         category_id: ID!
         name: String!
     ): Response!
 
-    deleteCategory(
+    deleteOrder(
         category_id: ID!
     ):Response!
 }
@@ -25,8 +27,8 @@ type Order{
     ispad: Boolean!
 }
 
-type Response {
-	status: Int!
-	message: String!
-	category: Category!
-}
+# type Response {
+# 	status: Int!
+# 	message: String!
+# 	order: Any!
+# }

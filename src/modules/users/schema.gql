@@ -6,9 +6,10 @@ type Query {
 }
 
 type Mutation {
-	addUser(username: String! password: String! contact: String! email: String!): Response!
+	register(username: String! password: String! contact: String! email: String!): authResponse!
 	updateUser(user_id: ID! username: String password: String contact: String email: String): Response!
 	deleteUser(user_id: ID!): Response!
+    login(username: String! password: String!): authResponse!
 }
 
 type User{
@@ -19,11 +20,8 @@ type User{
     role: String!
 }
 
-type Response {
-	status: Int!
-	message: String!
-	newUser: User!
+type authResponse{
+    status: Int!
+    message: String!
+    token: Any
 }
-
-scalar Contact
-scalar Email

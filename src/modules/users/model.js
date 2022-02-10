@@ -48,14 +48,24 @@ const DELETE_USERS = `
 	RETURNING *
 `
 
+const LOGIN = `
+    SELECT 
+    *
+    FROM users
+    WHERE (username IS NOT NULL AND username = $1) AND
+    (password IS NOT NULL AND password = crypt($2, password));
+`
+
 const getUsers = ({user_id, search}) => fetch(USERS, user_id, search)
 const addUser = ({username, password, contact, email}) => fetch(ADD_USERS, username, password, contact, email)
 const updateUser = ({user_id, username, password, contact, email}) => fetch(CHANGE_USERS, user_id, username, password, contact, email)
 const deleteUser = ({user_id}) => fetch(DELETE_USERS, user_id)
+const login = ({username, password}) => fetch(LOGIN, username, password)
 
 export default {
     getUsers,
     addUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    login
 }

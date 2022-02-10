@@ -21,16 +21,26 @@ type Query {
 
 type Mutation {
     addProduct(
+        category_id: ID!
         name: String!
+        price: Int!
+        short_info: String!
+        long_info: String!
+        file: Upload!
     ): Response!
 
     updateProduct(
-        category_id: ID!
-        name: String!
+        product_id: ID!
+        category_id: ID
+        name: String
+        price: Int
+        short_info: String 
+        long_info: String
+        img_url: String
     ): Response!
 
     deleteProduct(
-        category_id: ID!
+        product_id: ID!
     ):Response!
 }
 
@@ -44,8 +54,9 @@ type Product{
     img_url: String!
 }
 
-type Response {
-	status: Int!
-	message: String!
-	category: Category!
-}
+# type Response {
+# 	status: Int!
+# 	message: String!
+# 	product: Any
+# }
+

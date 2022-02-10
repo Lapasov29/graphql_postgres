@@ -58,7 +58,18 @@ export default{
 
     Query: {
         categories: async (_, args) => {
-            return await model.getCategory(args)
+            try {
+                console.log(args);
+                const res = await model.getCategory(args)
+                console.log(res);
+                return {
+                    status: 200,
+                    message: "OK",
+                    category: res[0]
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
         }
     }
 }
