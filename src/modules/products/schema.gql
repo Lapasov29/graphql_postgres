@@ -1,0 +1,51 @@
+input Pagination {
+	page: Int = 1
+	limit: Int = 2
+}
+
+input Filter {
+    category_id: ID
+    name: String
+    from: Int
+    to: Int
+}
+
+type Query {
+    products(
+        product_id: ID
+        filter: Filter = {}
+        search: String
+        pagination: Pagination = {}
+    ): [Product!]!
+}
+
+type Mutation {
+    addProduct(
+        name: String!
+    ): Response!
+
+    updateProduct(
+        category_id: ID!
+        name: String!
+    ): Response!
+
+    deleteProduct(
+        category_id: ID!
+    ):Response!
+}
+
+type Product{
+    product_id: ID!
+    category_id: ID!
+    name: String!
+    price: Int!
+    short_info: String!
+    long_info: String!
+    img_url: String!
+}
+
+type Response {
+	status: Int!
+	message: String!
+	category: Category!
+}

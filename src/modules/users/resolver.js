@@ -2,13 +2,13 @@ import model from './model.js'
 
 export default{
     Mutation: {
-        addCategory: async (_, args) => {
+        addUser: async (_, args) => {
             try {
-                const res = await model.addCategory(args)
+                const res = await model.addUser(args)
                 return {
                     status: 200,
                     message: "OK",
-                    category: res[0]
+                    newUser: res[0]
                 }
             } catch (error) {
                 return {
@@ -18,14 +18,14 @@ export default{
                 }
             }
         },
-        updateCategory: async(_, args) => {
+        updateUser: async(_, args) => {
             try {
-                const res = await model.updateCategory(args)
+                const res = await model.updateUser(args)
                 console.log(res);
                 return {
                     status: 200,
                     message: "OK",
-                    category: res[0]
+                    newUser: res[0]
                 }
             } catch (error) {
                 console.log(error.message);
@@ -36,14 +36,13 @@ export default{
                 }
             }
         },
-        deleteCategory: async(_, args) => {
+        deleteUser: async(_, args) => {
             try {
-                const res = await model.deleteCategory(args)
-                console.log(res);
+                const res = await model.deleteUser(args)
                 return {
                     status: 200,
                     message: "OK",
-                    category: res[0]
+                    newUser: res[0]
                 }
             } catch (error) {
                 console.log(error.message);
@@ -57,8 +56,12 @@ export default{
     },
 
     Query: {
-        categories: async (_, args) => {
-            return await model.getCategory(args)
+        users: async (_, args) => {
+            try{
+                return await model.getUsers(args)
+            }catch(error){
+                console.log(error.message);
+            }
         }
     }
 }

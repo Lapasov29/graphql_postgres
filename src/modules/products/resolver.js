@@ -57,8 +57,12 @@ export default{
     },
 
     Query: {
-        categories: async (_, args) => {
-            return await model.getCategory(args)
+        products: async (_, args) => {
+            try{
+                return await model.getProducts(args)
+            }catch(error){
+                console.log(error);
+            }
         }
     }
 }

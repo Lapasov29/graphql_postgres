@@ -13,17 +13,28 @@ const ADD_CATEGORY = `
 `
 
 const CHANGE_CATEGORY = `
-
+    UPDATE categories c SET
+        name = (
+            CASE WHEN LENGTH($2) > 0 THEN $2 ELSE c.name END
+        )
+    WHERE category_id = $1
+    RETURNING *
 `
 
 const DELETE_CATEGORY = `
-
+    DELETE FROM categories
+	WHERE category_id = $1
+	returning category_id, name
 `
 
 const getCategory = () => fetch(CATEGORIES)
 const addCategory = ({name}) => fetch(ADD_CATEGORY, name)
+const updateCategory = ({category_id, name}) => fetch(CHANGE_CATEGORY, category_id, name)
+const deleteCategory = ({category_id}) => fetch(DELETE_CATEGORY, category_id)
 
 export default {
     getCategory,
-    addCategory
+    addCategory,
+    updateCategory,
+    deleteCategory
 }

@@ -1,5 +1,5 @@
 type Query {
-    categories: [Category!]!
+    orders: [Order!]!
 }
 
 type Mutation {
@@ -17,9 +17,12 @@ type Mutation {
     ):Response!
 }
 
-type Category{
-    category_id: ID!
-    name: String!
+type Order{
+    order_id: ID!
+    user_id: ID!
+    products: [Product!]!
+    totalPrice: Int!
+    ispad: Boolean!
 }
 
 type Response {
