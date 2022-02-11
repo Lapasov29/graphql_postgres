@@ -42,8 +42,8 @@ insert into categories (name) values
 ('animals');
 
 insert into products (category_id, name, price, short_info, long_info, img_url) values
-(1, 'Redmi 10S', 300, 'The Redmi Note 10S is a slightly more powerful version of the Redmi Note 10 and both these devices are identical to look at.', 'The Redmi Note 10S is a slightly more powerful version of the Redmi Note 10 and both these devices are identical to look at. It has a 6.43-inch AMOLED display with Corning Gorilla Glass 3. The Redmi Note 10S has stereo speakers and an IR emitter that''s not common on budget smartphones', '/redmi10S.jpg'),
-(1, 'HP', 700, 'The Redmi Note 10S is a slightly more powerful version of the Redmi Note 10 and both these devices are identical to look at.', 'The Redmi Note 10S is a slightly more powerful version of the Redmi Note 10 and both these devices are identical to look at. It has a 6.43-inch AMOLED display with Corning Gorilla Glass 3.', '/hp10S.jpg'),
+(1, 'Redmi 10S', 300, 'The Redmi Note 10S is a slightly more powerful version of the Redmi Note 10 and both', 'The Redmi Note 10S is a slightly more powerful version of the Redmi Note 10', '/redmi10S.jpg'),
+(1, 'HP', 700, 'The Redmi Note 10S is a slightly more powerful version of the Redmi Note 10 and both ', 'The Redmi Note 10S is a slightly more powerful version of the Redmi', '/hp10S.jpg'),
 (2, 'Audi Q8', 3000, 'Leading the Audi SUV lineup is the Audi Q8, with its captivating design and powerful performance—all wrapped up in a sleek, SUV body', 'Progress, craftsmanship, and a passion for high performance ', '/audiQ8.jpg'),
 (2, 'Audi S3', 45800, 'The all-new 2022 Audi S3.', 'Progress, craftsmanship, and a passion for high performance ', '/audiS3.jpg'),
 (3, 'ball', 50, 'The all-new 2022 Audi S3.', 'Progress, craftsmanship, and a passion for high performance ', '/ball.jpg'),
