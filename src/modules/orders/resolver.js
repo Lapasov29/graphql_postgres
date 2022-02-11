@@ -9,51 +9,46 @@ export default{
                 return {
                     status: 200,
                     message: "OK",
-                    order: res[0]
                 }
             } catch (error) {
                 return {
                     status: 400,
 					message: error.message,
-					data: null
                 }
             }
         },
         updateOrder: async(_, args, context) => {
             try {
-                console.log(args);
                 if(args.user_id != context.user_id) throw new Error("Cannot update order of this user!")
                 const res = await model.updateOrder(args)
                 return {
                     status: 200,
                     message: "OK",
-                    category: res[0]
                 }
             } catch (error) {
-                console.log(error.message);
                 return {
                     status: 400,
 					message: error.message,
-					data: null
                 }
             }
         },
         deleteOrder: async(_, args, context) => {
-            console.log(args);
             try {
+                if(context.role == 2){
+                    if(args.user_id != context.user_id){
+                        throw new Error("Cannot delete order of this user!")
+                    }
+                }
                 const res = await model.deleteOrder(args)
-                console.log(res);
+                if(res.length == 0) throw new Error("There is no such order!")
                 return {
                     status: 200,
                     message: "OK",
-                    category: res[0]
                 }
             } catch (error) {
-                console.log(error.message);
                 return {
                     status: 400,
 					message: error.message,
-					data: null
                 }
             }
         }
@@ -61,6 +56,11 @@ export default{
 
     Query: {
         orders: async (_, args, context) => {
+            if(context.role == 2 && args.user_id){
+                throw new Error("Permission denied!")
+            }else if(context.role == 2){
+                args.user_id = context.user_id
+            }
             let {orders, products} = await model.getOrder(args)
             
             for(let ord of orders){

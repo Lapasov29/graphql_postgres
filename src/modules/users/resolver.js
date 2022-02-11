@@ -5,36 +5,32 @@ export default{
     Mutation: {
         updateUser: async(_, args, context) => {
             try {
+                args.user_id = context.user_id
                 const res = await model.updateUser(args)
-                console.log(res);
                 return {
                     status: 200,
                     message: "OK",
-                    newUser: res[0]
                 }
             } catch (error) {
-                console.log(error.message);
                 return {
                     status: 400,
 					message: error.message,
-					data: null
                 }
             }
         },
         deleteUser: async(_, args, context) => {
             try {
+                args.user_id = context.user_id
                 const res = await model.deleteUser(args)
+                if(res.length == 0) throw new Error("There is no such user!")
                 return {
                     status: 200,
                     message: "OK",
-                    newUser: res[0]
                 }
             } catch (error) {
-                console.log(error.message);
                 return {
                     status: 400,
 					message: error.message,
-					data: null
                 }
             }
         },
@@ -75,12 +71,13 @@ export default{
     },
 
     Query: {
-        users: async (_, args) => {
-            try{
+        users: async (_, args, context) => {
+                if(context.role == 2 && args.user_id){
+                    throw new Error("Permission denied!")
+                }else if(context.role == 2){
+                    args.user_id = context.user_id
+                }
                 return await model.getUsers(args)
-            }catch(error){
-                console.log(error.message);
-            }
         }
     }
 }

@@ -23,9 +23,14 @@ const PRODUCTS = `
         WHEN LENGTH($4) > 0 THEN (
             name ILIKE CONCAT('%', $4, '%')
         ) ELSE TRUE
+    END AND
+
+    CASE 
+        WHEN $5 > 0 AND $6 > 0 THEN price BETWEEN $5 AND $6
+        ELSE TRUE
     END
     ORDER BY product_id
-	offset $5 limit $6
+	offset $7 limit $8
 `
 
 const ADD_PRODUCT = `
@@ -65,7 +70,7 @@ const DELETE_PRODUCT = `
 	returning *
 `
 
-const getProducts = ({pagination: {page, limit}, filter: {category_id, name, from, to}, search, product_id, }) => fetch(PRODUCTS, product_id, search, category_id, name, (page - 1) * limit, limit)
+const getProducts = ({pagination: {page, limit}, filter: {category_id, name, from, to}, search, product_id, }) => fetch(PRODUCTS, product_id, search, category_id, name, from, to, (page - 1) * limit, limit)
 const addProduct = ({category_id, name, price, short_info, long_info, img_url}) => fetch(ADD_PRODUCT, category_id, name, price, short_info, long_info, img_url)
 const updateProduct = ({product_id, category_id, name, price, short_info, long_info, img_url}) => fetch(CHANGE_PRODUCT, product_id, category_id, name, price, short_info, long_info, img_url)
 const deleteProduct = ({product_id}) => fetch(DELETE_PRODUCT, product_id)

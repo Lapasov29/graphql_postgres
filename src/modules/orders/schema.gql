@@ -1,5 +1,5 @@
 type Query {
-    orders(order_id: ID): [Order!]!
+    orders(user_id: ID): [Order!]!
 }
 
 type Mutation {
@@ -28,9 +28,3 @@ type Order{
     totalPrice: Int!
     ispad: Boolean!
 }
-
-# type Response {
-# 	status: Int!
-# 	message: String!
-# 	order: Any!
-# }

@@ -7,8 +7,8 @@ type Query {
 
 type Mutation {
 	register(username: String! password: String! contact: String! email: String!): authResponse!
-	updateUser(user_id: ID! username: String password: String contact: String email: String): Response!
-	deleteUser(user_id: ID!): Response!
+	updateUser(username: String password: String contact: String email: String): Response!
+	deleteUser: Response!
     login(username: String! password: String!): authResponse!
 }
 

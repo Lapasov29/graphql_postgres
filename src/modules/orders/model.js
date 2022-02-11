@@ -3,6 +3,11 @@ const ORDERS = `
     SELECT 
         *
     FROM orders
+    WHERE 
+    CASE 
+        WHEN $1 > 0 THEN user_id = $1
+        ELSE TRUE
+    END
 `
 const PRODUCTS = `
     SELECT 
@@ -33,8 +38,8 @@ const DELETE_ORDERS = `
 	WHERE order_id = $1 AND user_id = $2
 	RETURNING *
 `
-const getOrder = async() => {
-    let orders = await fetch(ORDERS)
+const getOrder = async({user_id}) => {
+    let orders = await fetch(ORDERS, user_id)
     let products = await fetch(PRODUCTS)
     return {orders, products}
 }

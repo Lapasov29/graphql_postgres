@@ -4,53 +4,52 @@ export default{
     Mutation: {
         addCategory: async (_, args, context) => {
             try {
+                let { name } = args
+                if(!(name.length > 0)) throw new Error("Invalid input!")
                 const res = await model.addCategory(args)
                 return {
                     status: 200,
                     message: "OK",
-                    category: res[0]
                 }
             } catch (error) {
                 return {
                     status: 400,
-					message: error.message,
-					data: null
+					message: error.message
                 }
             }
         },
+
         updateCategory: async(_, args, context) => {
             try {
+                let { category_id, name } = args
+                if( category_id < 1 || name.length <= 0) throw new Error("Invalid input!")
                 const res = await model.updateCategory(args)
-                console.log(res);
+                if(res.length == 0) throw new Error("There is no such category!")
                 return {
                     status: 200,
                     message: "OK",
-                    category: res[0]
                 }
             } catch (error) {
-                console.log(error.message);
                 return {
                     status: 400,
 					message: error.message,
-					data: null
                 }
             }
         },
         deleteCategory: async(_, args, context) => {
             try {
+                let { category_id } = args
+                if(category_id < 1) throw new Error("Invalid input!")
                 const res = await model.deleteCategory(args)
-                console.log(res);
+                if(res.length == 0) throw new Error("There is no such category!")
                 return {
                     status: 200,
-                    message: "OK",
-                    category: res[0]
+                    message: "OK"
                 }
             } catch (error) {
-                console.log(error.message);
                 return {
                     status: 400,
 					message: error.message,
-					data: null
                 }
             }
         }
@@ -59,16 +58,10 @@ export default{
     Query: {
         categories: async (_, args) => {
             try {
-                console.log(args);
                 const res = await model.getCategory(args)
-                console.log(res);
-                return {
-                    status: 200,
-                    message: "OK",
-                    category: res[0]
-                }
+                return res
             } catch (error) {
-                console.log(error.message);
+                return error.message
             }
         }
     }

@@ -21,9 +21,3 @@ type Category{
     category_id: ID!
     name: String!
 }
-
-# type Response {
-# 	status: Int!
-# 	message: String!
-# 	category: Any
-# }
