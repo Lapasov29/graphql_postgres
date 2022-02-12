@@ -2,6 +2,9 @@ import queryParser from './helpers/queryParser.js'
 import jwt from 'jsonwebtoken'
 
 export default function ({ req, res }) {
+	let publicQueries = ['login', 'register', 'categories', 'products']
+	let userQueries = ['addOrder', 'updateOrder', 'deleteOrder', 'updateUser', 'deleteUser', 'orders', 'users']
+	let adminQueries = ['addCategory', 'updateCategory', 'deleteCategory', 'addProduct', 'updateProduct', 'deleteProduct', 'orders', 'users']
 
 	// for queries with variables
 	if(Object.keys(req.body.variables).length){
@@ -19,15 +22,13 @@ export default function ({ req, res }) {
 	if(fieldName == '__schema') return 
 
 	//public routes
-	if(fieldName == 'login' || fieldName == 'register') return req.headers
+	if(publicQueries.includes(fieldName)) return req.headers
 
-	const Token = req.headers.token
-	const reqAgent = req.headers['user-agent']
 	
-	let userQueries = ['addOrder', 'updateOrder', 'deleteOrder', 'updateUser', 'deleteUser', 'orders', 'users']
-	let adminQueries = ['addCategory', 'updateCategory', 'deleteCategory', 'addProduct', 'updateProduct', 'deleteProduct', 'orders', 'users']
 	
 	// private routes
+	const Token = req.headers.token
+	const reqAgent = req.headers['user-agent']
 	if(!Token) throw new Error('token is required')
 	
 	const { user_id, role, agent } = jwt.verify(Token, process.env.TOKEN_KEY)
